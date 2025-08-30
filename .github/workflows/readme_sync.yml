@@ -30,4 +30,9 @@ jobs:
         run:  |
           echo "$HEADER_SECTION" >> temp.md
           cat temp.md
+
+      - name: creating tabulation
+        run: |
+          dirs=$(ls -d */ | sed 's#/##')
+          echo "dirs"
         
