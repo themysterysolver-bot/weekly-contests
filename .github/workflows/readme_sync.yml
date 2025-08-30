@@ -51,12 +51,15 @@ jobs:
             string="$string $desc |"
             
             subfolders=$(ls -d $i/*/ 2>/dev/null | xargs -n 1 basename)
-            for sub in $subfolders;
-            do
-              path=${sub#${i}}
-              t="[$path](https://github.com/themysterysolver-bot/weekly-contests/tree/main/$i/$path) <br>"
-              string="$string $t"
-            done;
+
+            
+            if [[ -n "$subfolders" ]]; then
+              for sub in $subfolders; do
+                path=${sub#${i}}
+                t="[$path](https://github.com/themysterysolver-bot/weekly-contests/tree/main/$i/$path) <br>"
+                string="$string $t"
+              done
+            fi
             
             string="$string |"
             echo "$string" >> temp.md
