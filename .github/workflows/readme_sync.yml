@@ -50,7 +50,7 @@ jobs:
             
             string="$string $desc |"
             
-            subfolders=$(ls -d $i/*/ 2>/dev/null | xargs -n 1 basename)
+            subfolders=$(ls -d $i/*/ 2>/dev/null | xargs -d '\n' -n 1 basename)
             for sub in $subfolders;
             do
               path=${sub#${i}}
