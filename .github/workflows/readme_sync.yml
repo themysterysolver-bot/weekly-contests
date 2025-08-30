@@ -50,11 +50,11 @@ jobs:
             
             string="$string $desc |"
             
-            subfolders=$(ls -d $i/*/ 2>/dev/null | sed 's#/##')
+            subfolders=$(ls -d $i/*/ 2>/dev/null | xargs -n 1 basename)
             for sub in $subfolders;
             do
               path=${sub#${i}}
-              t="[$sub](https://github.com/themysterysolver-bot/weekly-contests/tree/main/$i/$path) <br>"
+              t="[$path](https://github.com/themysterysolver-bot/weekly-contests/tree/main/$i/$path) <br>"
               string="$string $t"
             done;
             
