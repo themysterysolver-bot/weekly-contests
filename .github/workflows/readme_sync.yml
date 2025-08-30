@@ -53,7 +53,8 @@ jobs:
             subfolders=$(ls -d $i/*/ 2>/dev/null | sed 's#/##')
             for sub in $subfolders;
             do
-              t="[$sub](https://github.com/themysterysolver-bot/weekly-contests/tree/main/$i/$sub) <br>"
+              path=${sub#${i}}
+              t="[$sub](https://github.com/themysterysolver-bot/weekly-contests/tree/main/$i/$path) <br>"
               string="$string $t"
             done;
             
