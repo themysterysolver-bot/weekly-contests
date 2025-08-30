@@ -34,5 +34,5 @@ jobs:
       - name: creating tabulation
         run: |
           dirs=$(ls -d */ | sed 's#/##')
-          echo "dirs"
+          echo "$dirs"
         
