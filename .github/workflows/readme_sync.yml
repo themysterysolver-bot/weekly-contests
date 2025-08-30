@@ -28,11 +28,39 @@ jobs:
   
       - name: Display header
         run:  |
-          echo "$HEADER_SECTION" >> temp.md
-          cat temp.md
+          echo "$HEADER_SECTION" >> dis.md
+          cat dis.md
 
       - name: creating tabulation
         run: |
           dirs=$(ls -d */ | sed 's#/##')
           echo "$dirs"
+
+          echo "| about | contents |" > temp.md
+          echo "|-----|-----|" >> temp.md
+          for i in $dirs;
+          do 
+            string="| [$i](https://github.com/themysterysolver-bot/weekly-contests/tree/main/$i) <br>"
+
+            if [[ -f "$i/description.txt" ]]; then
+              desc=$(cat "$i/description.txt")
+            else
+              desc=""
+            fi
+            
+            string="$string $desc |"
+            
+            subfolders=$(ls -d $i/*/ 2>/dev/null | sed 's#/##')
+            for sub in $subfolders;
+            do
+              t="[$sub](https://github.com/themysterysolver-bot/weekly-contests/tree/main/$i/$sub) <br>"
+              string="$string $t"
+            done;
+            
+            string="$string |"
+            echo "$string" >> temp.md
+          done;
+          cat temp.md
+          
+          
         
