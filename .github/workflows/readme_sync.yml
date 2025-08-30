@@ -62,6 +62,23 @@ jobs:
             echo "$string" >> temp.md
           done;
           cat temp.md
+
+      - name: create readme
+        run: |
+          cat dis.md temp.md > README.md
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet README.md; then
+            echo "No changes in README.md, skipping commit."
+          else
+            git add README.md
+            git commit -m "Update README.md with companies list"
+            git push
+          fi
+        
           
           
         
