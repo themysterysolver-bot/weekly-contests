@@ -1,1 +1,33 @@
+name: sync_it
+on:
+  workflow_dispatch
 
+permissions:
+  contents: write
+
+jobs:
+  update_readme:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+  
+      - name: Store header section
+        run: |
+          {
+            echo "HEADER_SECTION<<EOF"
+            echo "# weekly-contests"
+            echo 
+            echo "Weekly contests being conducted on hackerrank. This is a master repo containing the question description, tets cases and solutions for each contest."
+            echo 
+            echo "### Summary"
+            echo 
+            echo "EOF"
+          } >> $GITHUB_ENV
+  
+      - name: Display header
+        run:  |
+          echo "$HEADER_SECTION" >> temp.md
+          cat temp.md
+        
